@@ -32,6 +32,7 @@ const ListaRestaurantes = () => {
       console.log(e)
     })
   }
+  
 
   return (<section className={style.ListaRestaurantes}>
     <h1>Os restaurantes mais <em>bacanas</em>!</h1>
