@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import NavBar from '../../componentes/NavBar'
-import IRestaurante from '../../interfaces/IRestaurante'
+import NavBar from '../../../componentes/NavBar'
+import IRestaurante from '../../../interfaces/IRestaurante'
 import style from './Administracao.module.scss'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
-import { IPaginacao } from '../../interfaces/IPaginacao';
-import { error } from 'console';
 
 export default function Administracao() {
 
@@ -40,8 +38,7 @@ export default function Administracao() {
                                 {restaurantes.nome}        
                             </TableCell>
                         </TableRow>
-                    )}
-                   
+                    )}   
                 </TableBody>
             </Table>
         </TableContainer>
