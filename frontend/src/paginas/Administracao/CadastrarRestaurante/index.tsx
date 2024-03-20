@@ -19,15 +19,26 @@ export default function RestaurantesPost() {
 
     const submeterForm = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
-        axios.post('http://localhost:8000/api/v2/restaurantes/', {
-            nome: nomeRestaurante
-        })
+
+        if(parametro.id) {
+            axios.put(`http://localhost:8000/api/v2/restaurantes/${parametro.id}/`, {
+                nome: nomeRestaurante
+            })  
             .then(() => {
+                alert('Alterado')
+            })            
+        }  
+        else {
+            axios.post('http://localhost:8000/api/v2/restaurantes/', {
+            nome: nomeRestaurante
+            })
+                .then(() => {
                 alert('Inserido no Bd')
-            })
-            .catch(e => {
+                })
+                .catch(e => {
                 console.log(e)
-            })
+                })
+        }
     }
 
     return(

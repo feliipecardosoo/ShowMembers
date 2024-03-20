@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import NavBar from '../../../componentes/NavBar'
 import IRestaurante from '../../../interfaces/IRestaurante'
 import style from './Administracao.module.scss'
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 
@@ -20,6 +20,15 @@ export default function Administracao() {
         })
   }, [])
 
+  const excluirRestaurante = (restaurante: IRestaurante) => {
+
+    axios.delete(`http://localhost:8000/api/v2/restaurantes/${restaurante.id}/`, {})
+        .then(() => {
+            const show = restaurantes.filter(restauranteArray => restauranteArray.id !== restaurante.id)
+            setRestaurantes([...show])
+        })
+  }
+
     return (
         <>
         <NavBar />
@@ -33,6 +42,9 @@ export default function Administracao() {
                         <TableCell>
                             Editar: 
                         </TableCell>
+                        <TableCell>
+                            Excluir: 
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -43,7 +55,16 @@ export default function Administracao() {
                             </TableCell>
                             <TableCell>
                                 [<Link to={`${restaurantes.id}`}>Teste</Link>]
-                            </TableCell>
+                            </TableCell>       
+                            <TableCell>
+                               <Button 
+                                    variant='outlined' 
+                                    color='error'
+                                    onClick={() => excluirRestaurante(restaurantes)}
+                                > 
+                                    Excluir
+                                </Button>
+                            </TableCell>                        
                         </TableRow>
                     )}   
                 </TableBody>
