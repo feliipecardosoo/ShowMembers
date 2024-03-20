@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import IRestaurante from "../../../interfaces/IRestaurante";
+import http from "../../../http/API";
 
 export default function RestaurantesPost() {
 
@@ -10,7 +11,7 @@ export default function RestaurantesPost() {
 
     useEffect(() => {
         if(parametro.id) {
-            axios.get<IRestaurante>(`http://localhost:8000/api/v2/restaurantes/${parametro.id}/`)
+            http.get<IRestaurante>(`restaurantes/${parametro.id}/`)
                 .then(resposta => setNomeRestaurante(resposta.data.nome))
         }
     }, [parametro])
@@ -21,7 +22,7 @@ export default function RestaurantesPost() {
         evento.preventDefault()
 
         if(parametro.id) {
-            axios.put(`http://localhost:8000/api/v2/restaurantes/${parametro.id}/`, {
+            http.put(`/restaurantes/${parametro.id}/`, {
                 nome: nomeRestaurante
             })  
             .then(() => {
@@ -29,7 +30,7 @@ export default function RestaurantesPost() {
             })            
         }  
         else {
-            axios.post('http://localhost:8000/api/v2/restaurantes/', {
+            http.post('/restaurantes/', {
             nome: nomeRestaurante
             })
                 .then(() => {

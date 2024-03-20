@@ -5,13 +5,14 @@ import style from './Administracao.module.scss'
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import http from '../../../http/API';
 
 export default function Administracao() {
 
   const [ restaurantes, setRestaurantes ] = useState<IRestaurante[]>([])
 
   useEffect(() => {
-    axios.get<IRestaurante[]>('http://localhost:8000/api/v2/restaurantes/')
+    http.get<IRestaurante[]>('/restaurantes/')
         .then(e => {
             setRestaurantes(e.data)
         })
@@ -22,7 +23,7 @@ export default function Administracao() {
 
   const excluirRestaurante = (restaurante: IRestaurante) => {
 
-    axios.delete(`http://localhost:8000/api/v2/restaurantes/${restaurante.id}/`, {})
+    http.delete(`/restaurantes/${restaurante.id}/`, {})
         .then(() => {
             const show = restaurantes.filter(restauranteArray => restauranteArray.id !== restaurante.id)
             setRestaurantes([...show])
