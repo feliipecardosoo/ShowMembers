@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import NavBar from '../../../componentes/NavBar'
 import IRestaurante from '../../../interfaces/IRestaurante'
-import style from './Administracao.module.scss'
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import http from '../../../http/API';
 
-export default function Administracao() {
+export default function AdministracaoRestaurantes() {
 
   const [ restaurantes, setRestaurantes ] = useState<IRestaurante[]>([])
 
@@ -21,14 +19,16 @@ export default function Administracao() {
         })
   }, [])
 
-  const excluirRestaurante = (restaurante: IRestaurante) => {
+  const excluirRestaurante = (restauranteExcluido: IRestaurante) => {
 
-    http.delete(`/restaurantes/${restaurante.id}/`, {})
+    http.delete(`/restaurantes/${restauranteExcluido.id}/`, {})
         .then(() => {
-            const show = restaurantes.filter(restauranteArray => restauranteArray.id !== restaurante.id)
+            const show = restaurantes.filter(restauranteArray => restauranteArray.id !== restauranteExcluido.id)
             setRestaurantes([...show])
         })
   }
+
+  console.log(restaurantes)
 
     return (
         <>
@@ -37,6 +37,9 @@ export default function Administracao() {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell>
+                            ID: 
+                        </TableCell>
                         <TableCell>
                             Nome: 
                         </TableCell>
@@ -51,6 +54,9 @@ export default function Administracao() {
                 <TableBody>
                     {restaurantes.map(restaurantes => 
                          <TableRow key={restaurantes.id}>
+                            <TableCell>    
+                                {restaurantes.id}        
+                            </TableCell>
                             <TableCell>    
                                 {restaurantes.nome}        
                             </TableCell>
