@@ -3,6 +3,7 @@ import Home from './paginas/Home';
 import VitrineRestaurantes from './paginas/VitrineRestaurantes';
 import Administracao from './paginas/Administracao/ListarRestaurantes';
 import RestaurantesPost from './paginas/Administracao/CadastrarRestaurante';
+import PaginaBaseAdmin from './componentes/navBarAdm';
 
 function App() {
 
@@ -10,9 +11,13 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/restaurantes" element={<VitrineRestaurantes />} />
-      <Route path="/admin/restaurantes" element={<Administracao />} />
-      <Route path="/admin/restaurantes/:id" element={<RestaurantesPost />} />
-      <Route path="/admin/restaurantes/post" element={<RestaurantesPost />} />
+
+      <Route path="/admin" element={<PaginaBaseAdmin />}>  
+        <Route path="restaurantes" element={<Administracao />} />
+        <Route path="restaurantes/:id" element={<RestaurantesPost />} />
+        <Route path="restaurantes/post" element={<RestaurantesPost />} />
+      </Route>
+      
     </Routes>
   );
 }

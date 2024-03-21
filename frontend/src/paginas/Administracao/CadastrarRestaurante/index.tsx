@@ -1,5 +1,4 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import IRestaurante from "../../../interfaces/IRestaurante";
@@ -64,7 +63,6 @@ export default function RestaurantesPost() {
                 <Button 
                     variant="outlined"
                     type="submit"
-                    
                 >
                     Enviar
                 </Button>
