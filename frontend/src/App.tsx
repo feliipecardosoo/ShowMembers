@@ -5,6 +5,7 @@ import RestaurantesPost from './paginas/Administracao/CadastrarRestaurante';
 import PaginaBaseAdmin from './componentes/navBarAdm';
 import AdministracaoRestaurantes from './paginas/Administracao/ListarRestaurantes';
 import AdministracaoPratos from './paginas/Administracao/ListarPratos';
+import PratosPost from './paginas/Administracao/CadastrarPrato';
 
 function App() {
 
@@ -19,7 +20,9 @@ function App() {
         <Route path="restaurantes" element={<AdministracaoRestaurantes />} />
 
         <Route path="restaurantes/:id" element={<RestaurantesPost />} />
+
         <Route path="restaurantes/post" element={<RestaurantesPost />} />
+        <Route path="pratos/post" element={<PratosPost />} />
       </Route>
       
     </Routes>
