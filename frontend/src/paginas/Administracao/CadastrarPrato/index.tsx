@@ -25,6 +25,27 @@ export default function PratosPost() {
     const submeterForm = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
 
+        const formData = new FormData()
+
+        formData.append('nome', nomePrato)
+        formData.append('tag', tag)
+        formData.append('descricao', descricao)
+        formData.append('restaurante', restaurante)
+
+        http.request({
+            url: 'pratos/',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data: formData        
+        })
+            .then(() => {
+                alert('Cadastrado com sucesso!')
+            })
+            .catch((e) => {
+                alert(e)
+            })
     }
 
     return(
@@ -62,7 +83,7 @@ export default function PratosPost() {
                 <FormControl margin="dense" fullWidth>
                     <InputLabel id="select-tag">Tag</InputLabel>
                     <Select labelId="select-tag" value={tag} onChange={e => setTag(e.target.value)}>
-                        {tags.map(tag => <MenuItem key={tag.id} value={tag.id}>
+                        {tags.map(tag => <MenuItem key={tag.id} value={tag.value}>
                             {tag.value}
                         </MenuItem>)}
                     </Select>
